@@ -1,3 +1,8 @@
+"""
+You can follow bert_wnli_finetune_corrected.ipynb and do the same for distilBERT
+"""
+
+
 # DistilBERT fine-tuned for 5 epochs on WNLI dataset
 
 # 1. Install dependencies (uncomment if needed)

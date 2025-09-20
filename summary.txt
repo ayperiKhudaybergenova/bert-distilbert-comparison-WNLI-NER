@@ -1,0 +1,31 @@
+Dear Ayperi,
+
+You can find the detailed comments across the separate files, but this is a summary of my comments:
+
+Please,
+  (1) Have a README.md which shows how to setup the project and the project environment
+  (2) Have a requirements.txt which shows all specific libraries that need to be installed
+  (3) Sequence Classification (WNLI)
+      (3.1) Fine-tuning
+            BERT/DistilBERT the accuracy is actually the loss during training,
+            also it is not fair to evaluate on the train data. You can see a guide to follow
+            in bert_wnli_finetune_corrected.ipynb - but feel free to ask questions and if you find mistakes,
+            feel free to correct them.
+
+      (3.2) Zero-shot
+            BERT/DistilBERT - is it the same dataset as the one for fine-tuning? If you have time, you can use the same, if not - it is fine.
+            Upload your datasets, especially if they are less than 50MB to GitHub, and if possible use the same dataset
+            for fine-tuning/zero-shot evaluation.
+
+
+  (4) Token Classification (CoNLL2003)
+      NER_finetuned_CoNLLTestSet.py - make sure to decode the predictions to the IOB format, as the dataset seems to follow it.
+      NER_finetuned_RealTestSet.py - are these two different scripts? It is good to also include the source of the original source of the data (uploading the files is enough)
+
+Overall, there are many nice things but also things one should be careful about. If you are interested and have enough time, it will be nice to consider the proposed changes.
+
+
+Good luck!
+
+Best,
+Mario

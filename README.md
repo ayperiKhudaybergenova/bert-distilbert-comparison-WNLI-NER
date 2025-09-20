@@ -1,3 +1,19 @@
+""" <br>
+I suggest to start the README with instructions how to setup the project <br>
+**For example:**
+
+1. Install python
+2. Create virtual environment (python3 -m venv env_name)
+3. Activate environment (source .venv/Scripts/activate)
+4. Install requirements (usually pip install -r requirements.txt)
+5. Work in the environment
+6. Deactivate the environment (deactivate)
+7. Delete the environment (rm -rf env_name)
+
+You can do the same if you use conda/miniconda/mini-forge or some other environment manager
+
+""
+
 # Bert-distilBERT-comparison-WNLI-NER
 Comparative analysis of BERT and DistilBERT on WNLI and NER tasks
 
@@ -21,6 +37,13 @@ Here implemented  fine-tuning of the pre-trained BERT model using the Hugging Fa
 
 Fine-tuned  DistilBERT model on the Winograd Natural Language Inference (WNLI) task using the Hugging Face `transformers` and `datasets` libraries. The WNLI data was accessed from the GLUE benchmark via `load_dataset()`. After tokenizing the sentence pairs with `AutoTokenizer`,  Hugging Face Trainer API to train the model for 5 epochs, logging the training loss every 10 steps. The model successfully completed 400 steps, and performance was monitored using training loss and accuracy. Notably, the accuracy peaked at both step 20 and step 320 with a value of **0.7083**, indicating some inconsistency during training.
 
+
+"""
+Better refer to the local files, in case someone does not have access to your repository
+
+[View the fine-tuning DistilBERT code here](distilBERT_wnli_finetuned.py)
+
+""" <br>
 [View the fine-tuning DistilBERT code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/distilBERT_wnli_finetuned.py)
 
 ---
@@ -66,6 +89,16 @@ This project evaluates zero-shot performance of pre-trained language models on t
 
 * Zero-shot accuracy on WNLI (DistilBERT): 0.4992
 * Zero-shot accuracy on WNLI (BERT): 0.5087
+
+
+"""
+
+Same goes here: 
+
+[View the zero-shot evaluation code here](bert%2CdistilBERT_wnli_zeroshot.py)
+
+
+"""
 
 [View the zero-shot evaluation code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/bert%2CdistilBERT_wnli_zeroshot.py)
 

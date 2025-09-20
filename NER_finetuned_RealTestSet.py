@@ -2,6 +2,12 @@
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 import torch
 
+"""
+Tip: you can also use 'cuda' or 'cpu' as devices, 'cuda' will allocate the resources automatically to available GPU
+Tip: use CTRL+ALT+L in PyCharm (or other combination in your IDE) to format your code 
+
+"""
+
 device = 0 if torch.cuda.is_available() else -1
 print(f"Device set to use {'GPU' if device == 0 else 'CPU'}")
 
@@ -14,6 +20,11 @@ distilbert_model_name = "elastic/distilbert-base-uncased-finetuned-conll03-engli
 distilbert_tokenizer = AutoTokenizer.from_pretrained(distilbert_model_name)
 distilbert_model = AutoModelForTokenClassification.from_pretrained(distilbert_model_name)
 distilbert_ner = pipeline("ner", model=distilbert_model, tokenizer=distilbert_tokenizer, device=device)
+
+"""
+it is good to indicate as a comment what you are trying to show with this comparison, 
+because it seems that these are two different scripts combined
+"""
 
 # Test sentences
 sentences = [
@@ -34,37 +45,53 @@ for i, sentence in enumerate(sentences, 1):
     print(f"Sentence {i}: {sentence}")
     print(f"Entities: {entities}\n")
 
+"""
+all imports should be at the beginning
+"""
 
 from transformers import pipeline
 from sklearn.metrics import precision_score, recall_score, f1_score
 import numpy as np
 
+"""
+what is the source of the data? I think is better to read it from a file which is also shared in the project
+"""
+
 examples = [
     {"sentence": "Barack Obama was born in Hawaii.", "entities": [("Barack Obama", "PER"), ("Hawaii", "LOC")]},
-    {"sentence": "Google is headquartered in Mountain View.", "entities": [("Google", "ORG"), ("Mountain View", "LOC")]},
-    {"sentence": "Angela Merkel was Chancellor of Germany.", "entities": [("Angela Merkel", "PER"), ("Germany", "LOC")]},
-    {"sentence": "Elon Musk founded SpaceX in California.", "entities": [("Elon Musk", "PER"), ("SpaceX", "ORG"), ("California", "LOC")]},
+    {"sentence": "Google is headquartered in Mountain View.",
+     "entities": [("Google", "ORG"), ("Mountain View", "LOC")]},
+    {"sentence": "Angela Merkel was Chancellor of Germany.",
+     "entities": [("Angela Merkel", "PER"), ("Germany", "LOC")]},
+    {"sentence": "Elon Musk founded SpaceX in California.",
+     "entities": [("Elon Musk", "PER"), ("SpaceX", "ORG"), ("California", "LOC")]},
     {"sentence": "The United Nations is in New York.", "entities": [("United Nations", "ORG"), ("New York", "LOC")]},
     {"sentence": "Amazon has offices in Seattle.", "entities": [("Amazon", "ORG"), ("Seattle", "LOC")]},
-    {"sentence": "Cristiano Ronaldo plays for Al-Nassr.", "entities": [("Cristiano Ronaldo", "PER"), ("Al-Nassr", "ORG")]},
+    {"sentence": "Cristiano Ronaldo plays for Al-Nassr.",
+     "entities": [("Cristiano Ronaldo", "PER"), ("Al-Nassr", "ORG")]},
     {"sentence": "Meta Platforms owns Instagram.", "entities": [("Meta Platforms", "ORG"), ("Instagram", "ORG")]},
     {"sentence": "Lionel Messi joined Inter Miami.", "entities": [("Lionel Messi", "PER"), ("Inter Miami", "ORG")]},
     {"sentence": "Apple was founded in Cupertino.", "entities": [("Apple", "ORG"), ("Cupertino", "LOC")]},
     {"sentence": "Boris Johnson is from the UK.", "entities": [("Boris Johnson", "PER"), ("UK", "LOC")]},
-    {"sentence": "NASA launched Artemis from Florida.", "entities": [("NASA", "ORG"), ("Artemis", "MISC"), ("Florida", "LOC")]},
+    {"sentence": "NASA launched Artemis from Florida.",
+     "entities": [("NASA", "ORG"), ("Artemis", "MISC"), ("Florida", "LOC")]},
     {"sentence": "The Louvre is in Paris.", "entities": [("Louvre", "ORG"), ("Paris", "LOC")]},
     {"sentence": "Samsung is based in Seoul.", "entities": [("Samsung", "ORG"), ("Seoul", "LOC")]},
-    {"sentence": "The World Health Organization warned about COVID-19.", "entities": [("World Health Organization", "ORG"), ("COVID-19", "MISC")]},
+    {"sentence": "The World Health Organization warned about COVID-19.",
+     "entities": [("World Health Organization", "ORG"), ("COVID-19", "MISC")]},
     {"sentence": "Taylor Swift performed in London.", "entities": [("Taylor Swift", "PER"), ("London", "LOC")]},
     {"sentence": "Netflix streamed a show from Los Angeles.", "entities": [("Netflix", "ORG"), ("Los Angeles", "LOC")]},
     {"sentence": "Pfizer developed the vaccine with BioNTech.", "entities": [("Pfizer", "ORG"), ("BioNTech", "ORG")]},
-    {"sentence": "Jack Ma started Alibaba in China.", "entities": [("Jack Ma", "PER"), ("Alibaba", "ORG"), ("China", "LOC")]},
+    {"sentence": "Jack Ma started Alibaba in China.",
+     "entities": [("Jack Ma", "PER"), ("Alibaba", "ORG"), ("China", "LOC")]},
     {"sentence": "The BBC is a British broadcaster.", "entities": [("BBC", "ORG")]},
-    {"sentence": "Harvard University is in Cambridge.", "entities": [("Harvard University", "ORG"), ("Cambridge", "LOC")]},
+    {"sentence": "Harvard University is in Cambridge.",
+     "entities": [("Harvard University", "ORG"), ("Cambridge", "LOC")]},
     {"sentence": "The G7 summit was held in Japan.", "entities": [("G7", "ORG"), ("Japan", "LOC")]},
     {"sentence": "The President lives in the White House.", "entities": [("White House", "LOC")]},
     {"sentence": "Spotify is available in India.", "entities": [("Spotify", "ORG"), ("India", "LOC")]},
-    {"sentence": "Satya Nadella is the CEO of Microsoft.", "entities": [("Satya Nadella", "PER"), ("Microsoft", "ORG")]},
+    {"sentence": "Satya Nadella is the CEO of Microsoft.",
+     "entities": [("Satya Nadella", "PER"), ("Microsoft", "ORG")]},
     {"sentence": "IBM researchers work in Zurich.", "entities": [("IBM", "ORG"), ("Zurich", "LOC")]},
     {"sentence": "Jeff Bezos founded Blue Origin.", "entities": [("Jeff Bezos", "PER"), ("Blue Origin", "ORG")]},
     {"sentence": "Google Maps is used in Germany.", "entities": [("Google Maps", "ORG"), ("Germany", "LOC")]},
@@ -72,10 +99,20 @@ examples = [
     {"sentence": "Cambridge Analytica shut down after scandal.", "entities": [("Cambridge Analytica", "ORG")]},
 ]
 
+"""
+good!
+"""
+
 models = {
-    "DistilBERT": pipeline("ner", model="elastic/distilbert-base-uncased-finetuned-conll03-english", aggregation_strategy="simple", device=device),
+    "DistilBERT": pipeline("ner", model="elastic/distilbert-base-uncased-finetuned-conll03-english",
+                           aggregation_strategy="simple", device=device),
     "BERT": pipeline("ner", model="dslim/bert-base-NER", aggregation_strategy="simple", device=device),
 }
+
+"""
+good!
+"""
+
 
 def evaluate_model(pipeline, examples):
     true_labels = []
@@ -86,6 +123,7 @@ def evaluate_model(pipeline, examples):
         pred_ents_raw = pipeline(text)
         pred_ents = set((ent['word'].lower(), ent['entity_group']) for ent in pred_ents_raw)
         all_ents = true_ents.union(pred_ents)
+
         for ent in all_ents:
             true_labels.append(1 if ent in true_ents else 0)
             pred_labels.append(1 if ent in pred_ents else 0)
@@ -95,6 +133,20 @@ def evaluate_model(pipeline, examples):
     accuracy = np.mean([t == p for t, p in zip(true_labels, pred_labels)])
     return accuracy, precision, recall, f1
 
+
+"""
+it can be interesting to also calculate F1-macro to avoid the effect of class imbalance,
+and show an error-analysis
+"""
+
+"""
+Overall, you can refer to the tutorials from the SNLP2 course.
+We show step-by-step the process from getting the data to evaluating and discussing the models performance
+"""
+
+"""
+good!
+"""
 for name, ner_model in models.items():
     accuracy, precision, recall, f1 = evaluate_model(ner_model, examples)
     print(f"\n{name} Results:")
@@ -102,6 +154,7 @@ for name, ner_model in models.items():
     print(f"Precision: {precision:.2%}")
     print(f"Recall: {recall:.2%}")
     print(f"F1 Score: {f1:.2%}")
+
 # Device set to use CPU
 # Some weights of the model checkpoint at dslim/bert-base-NER were not used when initializing BertForTokenClassification.
 # This IS expected if you are initializing BertForTokenClassification from a checkpoint that was not specifically trained for token classification.
@@ -139,4 +192,3 @@ for name, ner_model in models.items():
 
 # Sentence 3: Apple is looking at buying U.K. startup for $1 billion.
 # Entities: [{'entity': 'B-ORG', 'word': 'Apple'}, {'entity': 'B-LOC', 'word': 'U.K.'}, ...]
-

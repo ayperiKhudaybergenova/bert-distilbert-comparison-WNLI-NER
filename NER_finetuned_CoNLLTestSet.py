@@ -1,12 +1,20 @@
-!pip install transformers datasets seqeval -q
+# !pip install transformers datasets seqeval -q
 
+"""
+do not forget to add all used libraries to the requirements.txt
+"""
 import os, time, torch
 from datasets import DatasetDict, Dataset
 from transformers import AutoTokenizer, AutoModelForTokenClassification, pipeline
 from seqeval.metrics import f1_score, accuracy_score
 
 # 1️⃣ Load your local CoNLL-2003 data
+"""
+be aware with the potential issues of the dataset https://github.com/synalp/NER/issues
+"""
+
 data_dir = "/content/conll2003"
+
 
 def read_conll(path):
     tokens, tags = [], []
@@ -25,9 +33,18 @@ def read_conll(path):
                 tags.append(splits[-1])
     return {"tokens": all_tokens, "ner_tags": all_tags}
 
+
+"""
+good!
+"""
+
 train = read_conll(os.path.join(data_dir, "eng.train"))
 valid = read_conll(os.path.join(data_dir, "eng.testa"))
-test  = read_conll(os.path.join(data_dir, "eng.testb"))
+test = read_conll(os.path.join(data_dir, "eng.testb"))
+
+"""
+good!
+"""
 
 dataset = DatasetDict({
     "train": Dataset.from_dict(train),
@@ -43,8 +60,32 @@ unique_tags = set(tag for doc in dataset["train"]["ner_tags"] for tag in doc)
 label_list = sorted(list(unique_tags))
 print("Labels:", label_list)
 
+
 # 3️⃣ Convert Hugging Face spans → BIO
 def hf_preds_to_bio(tokens, ner_results):
+    """
+    make sure you understand the format of the data,
+    it seems to me it does not follow the standard BIO-format,
+    but rather IOB, which is:
+
+
+    ['Waterville', 'WA', '5.05', 'up', '.02', '---', '---', '4.6200', 'unc']
+    ['I-LOC', 'B-LOC', 'O', 'O', 'O', 'O', 'O', 'O', 'O']
+
+    this is an example from the train data,
+    you can see B-LOC is used to separate the last adjacent LOC tag
+
+    your BIO construction now risks having many false positives, which are actually true positives
+
+    GOLD: ['I-LOC', 'O', 'I-LOC', 'I-LOC', 'I-LOC', 'O']
+    PREDICTED: ['B-LOC', 'O', 'B-LOC', 'I-LOC', 'I-LOC', 'O']
+    LABELS:    [fp, tp, fp, tp, tp, tp]
+
+    for example, you have two fps which are actually tps if you change the format
+
+    refer to https://github.com/synalp/NER/issues/1
+    """
+
     pred_tags = ["O"] * len(tokens)
     for ent in ner_results:
         ent_type = ent["entity_group"]
@@ -62,6 +103,7 @@ def hf_preds_to_bio(tokens, ner_results):
             char_pos = char_pos_end + 1
     return pred_tags
 
+
 # 4️⃣ Evaluation function
 def evaluate_model(model_name, dataset, n_samples=None):
     print(f"\n🚀 Evaluating {model_name}")
@@ -69,10 +111,12 @@ def evaluate_model(model_name, dataset, n_samples=None):
     model = AutoModelForTokenClassification.from_pretrained(model_name)
 
     device = 0 if torch.cuda.is_available() else -1
+    # good, you can experiment with different aggregations like max, average, etc.
     ner_pipe = pipeline("ner", model=model, tokenizer=tokenizer, aggregation_strategy="simple", device=device)
 
     true_labels, pred_labels = [], []
 
+    # good
     test_split = dataset["test"] if n_samples is None else dataset["test"].select(range(n_samples))
     start_time = time.time()
 
@@ -82,6 +126,9 @@ def evaluate_model(model_name, dataset, n_samples=None):
         true_labels.append(gold)
 
         preds = ner_pipe(" ".join(tokens))
+        """
+            please read the comments in hf_preds_to_bio
+        """
         bio_preds = hf_preds_to_bio(tokens, preds)
         pred_labels.append(bio_preds)
 
@@ -95,12 +142,19 @@ def evaluate_model(model_name, dataset, n_samples=None):
     print(f"📊 F1 score: {f1:.4f}")
     print(f"✅ Accuracy: {acc:.4f}")
 
+
+"""
+good!
+"""
 # 5️⃣ Compare DistilBERT vs BERT
 evaluate_model("elastic/distilbert-base-cased-finetuned-conll03-english", dataset, n_samples=200)
 evaluate_model("dslim/bert-base-NER", dataset, n_samples=200)
 
+"""
+if you want to show your output, better use a notebook
+"""
 
-#output
+# output
 # DatasetDict({
 #     train: Dataset({
 #         features: ['tokens', 'ner_tags'],

@@ -1,7 +1,13 @@
 # Bert fine-tuned for 5 epochs on WNLI
 
+"""
+I suggest putting this in the requirements file.
+You can generate it with pip freeze > requirements.txt (it will generate all dependencies, but you can only leave the main libraries)
+"""
+
 # 1. Install/upgrade transformers and datasets (uncomment if needed)
 # !pip install --upgrade transformers datasets
+
 
 # 2. Import packages
 from datasets import load_dataset
@@ -11,11 +17,13 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trai
 import transformers
 import datasets
 
+
 print("Transformers version:", transformers.__version__)
 print("Datasets version:", datasets.__version__)
 
 # Clear cache (optional)
 import os
+
 os.system("rm -rf /root/.cache/huggingface/datasets")
 
 # Load WNLI train split
@@ -26,17 +34,24 @@ model_name = "bert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
 
+
 # Tokenize function
 def preprocess(batch):
     return tokenizer(batch['sentence1'], batch['sentence2'], truncation=True, padding=True)
+
 
 # Tokenize dataset
 wnli_train_tokenized = wnli_train.map(preprocess, batched=True)
 
 # Set PyTorch format
+
 wnli_train_tokenized.set_format('torch', columns=['input_ids', 'attention_mask', 'label'])
 
 # Training arguments (no evaluation_strategy)
+"""
+Did you create an account at wandb, you can not use any such service with 
+report_to='none'
+"""
 training_args = TrainingArguments(
     output_dir="./results",
     num_train_epochs=5,
@@ -55,6 +70,13 @@ trainer = Trainer(
 
 # Start training
 trainer.train()
+
+"""
+Are you sure this is the accuracy?
+The training loss is different from accuracy, also you can see the loss decreases. We expect the accuracy to increase.
+Also, it is not fair to evaluate the accuracy on the same set you give to the model to train on. You would need to split the data into train and dev set.
+You can see a corrected version bert_wnli_finetune_corrected.ipynb
+"""
 
 # Output (accuracy at various logging steps)
 # 10  0.714700

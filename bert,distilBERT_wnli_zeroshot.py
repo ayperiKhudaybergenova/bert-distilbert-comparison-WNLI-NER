@@ -1,10 +1,13 @@
 # Install transformers and mount Google Drive
-!pip install transformers
-!pip install --upgrade transformers
+# !pip install transformers
+# !pip install --upgrade transformers
 
-from google.colab import drive
-drive.mount('/content/drive')
+# from google.colab import drive
+# drive.mount('/content/drive')
 
+"""
+Is this the same WNLI dataset?
+"""
 file_path = '/content/drive/My Drive/train_complete.csv'
 
 # Read and print first 5 lines from the file
@@ -31,9 +34,6 @@ print(dataset[0])
 # {'premise': 'I stuck a pin through a carrot. When I pulled the pin out, it}
 
 
-
-
-
 from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
@@ -44,7 +44,12 @@ dataset = load_dataset('csv', data_files=data_files, split='test')
 
 model_name = "distilbert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
+
 model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=3)
+
+"""
+This dataset has three labels, the WNLI had only two, and your label_map has two
+"""
 
 label_map = {'entailment': 0, 'not_entailment': 1}
 
@@ -69,6 +74,9 @@ print(f"Zero-shot accuracy on WNLI: {accuracy:.4f}")
 
 # Zero-shot accuracy on WNLI: 0.4992
 
+"""
+It is best if you could separate the scripts and avoid commas in the names of the files
+"""
 
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
@@ -77,6 +85,9 @@ from sklearn.metrics import accuracy_score
 # BERT
 model_name = "bert-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
+"""
+better keep num_labels same across models
+"""
 model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
 
 inputs = tokenizer(
