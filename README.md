@@ -34,6 +34,7 @@ The link to the local files if no repository access:
 Fine-tuned  DistilBERT model on the Winograd Natural Language Inference (WNLI) task using the Hugging Face `transformers` and `datasets` libraries. The WNLI data was accessed from the GLUE benchmark via `load_dataset()`. After tokenizing the sentence pairs with `AutoTokenizer`,  Hugging Face Trainer API to train the model for 5 epochs, logging the training loss every 10 steps. The model successfully completed 400 steps, and performance was monitored using training loss and accuracy. Notably, the accuracy peaked at both step 20 and step 320 with a value of **0.7083**, indicating some inconsistency during training.
 
 [View the fine-tuning DistilBERT code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/distilBERT_wnli_finetuned.py)
+
 ---
 The link to the local files if no repository access:
 
