@@ -27,7 +27,7 @@ Here implemented  fine-tuning of the pre-trained BERT model using the Hugging Fa
 
 [View the fine-tuning BERT code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/bert_wnli_finetune.py)
 
-### The link to the local files, in case one does not have access to the repository:
+The link to the local files if no repository access:
 ---
 
 ## 2. Fine-tuning DistilBERT on WNLI
@@ -36,7 +36,7 @@ Fine-tuned  DistilBERT model on the Winograd Natural Language Inference (WNLI) t
 
 [View the fine-tuning DistilBERT code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/distilBERT_wnli_finetuned.py)
 
-### The link to the local files, in case one does not have access to the repository:
+The link to the local files if no repository access:
 ---
 
 ## 3. Named Entity Recognition (NER) with BERT and DistilBERT
