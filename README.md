@@ -8,6 +8,18 @@ Model distillation has become a vital technique for compressing large transforme
 In addition,  Named Entity Recognition (NER) is examined, a task not covered in the original DistilBERT paper, due to its practical importance and the availability of smaller, structured datasets. DistilBERT performed reliably on NER, with fine-tuning yielding better results, and the F1-score offering a more informative evaluation than accuracy alone. These findings emphasize both the strengths and limitations of model distillation across different NLP challenges.
 
 ---
+## Instructions to set-up
+1. Install python
+2. Create virtual environment (python3 -m venv env_name)
+3. Activate environment (source .venv/Scripts/activate)
+4. Install requirements (usually pip install -r requirements.txt)
+5. Work in the environment
+6. Deactivate the environment (deactivate)
+7. Delete the environment (rm -rf env_name)
+
+You can do the same if you use conda/miniconda/mini-forge or some other environment manager
+
+""
 
 ## 1. Fine-tuning BERT on WNLI
 
