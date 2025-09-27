@@ -19,7 +19,7 @@ In addition,  Named Entity Recognition (NER) is examined, a task not covered in 
 
 You can do the same if you use conda/miniconda/mini-forge or some other environment manager
 
-""
+---
 
 ## 1. Fine-tuning BERT on WNLI
 
