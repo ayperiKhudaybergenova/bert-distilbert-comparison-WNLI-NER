@@ -28,14 +28,14 @@ Here implemented  fine-tuning of the pre-trained BERT model using the Hugging Fa
 
 ---
 The link to the local files if no repository access:
+
 ## 2. Fine-tuning DistilBERT on WNLI
 
 Fine-tuned  DistilBERT model on the Winograd Natural Language Inference (WNLI) task using the Hugging Face `transformers` and `datasets` libraries. The WNLI data was accessed from the GLUE benchmark via `load_dataset()`. After tokenizing the sentence pairs with `AutoTokenizer`,  Hugging Face Trainer API to train the model for 5 epochs, logging the training loss every 10 steps. The model successfully completed 400 steps, and performance was monitored using training loss and accuracy. Notably, the accuracy peaked at both step 20 and step 320 with a value of **0.7083**, indicating some inconsistency during training.
 
 [View the fine-tuning DistilBERT code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/distilBERT_wnli_finetuned.py)
-
-The link to the local files if no repository access:
 ---
+The link to the local files if no repository access:
 
 ## 3. Named Entity Recognition (NER) with BERT and DistilBERT
 
@@ -54,8 +54,7 @@ Results show BERT achieving higher F1 and accuracy scores, while DistilBERT offe
 * DistilBERT F1 Score: 63.77%
 
 [View the NER comparison code here](NER_finetuned_RealTestSet.py)
-
-### The link to the local files, in case one does not have access to the repository:
+The link to the local files if no repository access:
 
 2. Quantitative analysis: comparing named entities detected on **CoNLL-2003 test set**
    
@@ -65,9 +64,9 @@ Even though 'Inference time' is doubled when working with BERT,the results show 
 * DistilBERT F1 Score: 93.87%
 
 [View the NER comparison code here](NER_finetuned_CoNLLTestSet.py)
+The link to the local files if no repository access:
 
 DistilBERT doing slightly better on CoNLL-2003 could be because of regularisation effects during distillation, but its worse performance in real-life examples might show that compression comes with loss of robustness.These results underline the importance of evaluating on both standard benchmarks and out-of-domain examples to get a realistic picture of model performance.
-
 
 
 ---
@@ -80,8 +79,7 @@ This project evaluates zero-shot performance of pre-trained language models on t
 * Zero-shot accuracy on WNLI (BERT): 0.5087
 
 [View the zero-shot evaluation code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/bert%2CdistilBERT_wnli_zeroshot.py)
-
-### The link to the local files, in case one does not have access to the repository:
+The link to the local files if no repository access:
 
 In Conclusion,even though DistilBERT performs slightly lower than BERT in some tasks ( NER and WNLI), it still retains around 97% of BERT’s performance while being significantly smaller and faster. It is already a win. Depending on your task requirements — whether accuracy or efficiency is the priority — **either model can be the better choice**.
 
