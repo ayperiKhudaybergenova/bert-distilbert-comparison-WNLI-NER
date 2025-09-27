@@ -9,15 +9,14 @@ In addition,  Named Entity Recognition (NER) is examined, a task not covered in 
 
 ---
 ## Instructions to set-up
-1. Install python
-2. Create virtual environment (python3 -m venv env_name)
-3. Activate environment (source .venv/Scripts/activate)
-4. Install requirements (usually pip install -r requirements.txt)
-5. Work in the environment
-6. Deactivate the environment (deactivate)
-7. Delete the environment (rm -rf env_name)
+1. Install Python 3.7+ (check with: python --version)  
+2. Clone the repo (git clone https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER.git)  
+3. Create virtual environment (optional but recommended: python -m venv venv && source venv/bin/activate)  
+4. Install dependencies (pip install -r requirements.txt)  
+5. Load datasets (WNLI from Hugging Face, NER from data/ folder or datasets library)  
+6. Run notebooks/scripts (use bert-base-uncased and distilbert-base-uncased for comparison)  
+7. Check results (metrics, logs, checkpoints saved in results/ or specified folder)  
 
-You can do the same if you use conda/miniconda/mini-forge or some other environment manager
 
 ---
 ## 1. Fine-tuning BERT on WNLI
