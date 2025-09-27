@@ -44,8 +44,6 @@ This project compares the performance of two transformer models — BERT and Dis
 * [`dslim/bert-base-NER`](https://huggingface.co/dslim/bert-base-NER) (BERT fine-tuned on CoNLL-2003)
 * [`elastic/distilbert-base-uncased-finetuned-conll03-english`](https://huggingface.co/elastic/distilbert-base-uncased-finetuned-conll03-english) (DistilBERT fine-tuned on CoNLL-2003)
 
-The analysis includes:
-
 1. Qualitative analysis: comparing named entities detected on **Real-world test sentences.**
 
 Results show BERT achieving higher F1 and accuracy scores, while DistilBERT offers faster inference and some  trade-offs for lightweight applications.
