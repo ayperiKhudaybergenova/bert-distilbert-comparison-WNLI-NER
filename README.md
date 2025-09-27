@@ -27,7 +27,7 @@ Here implemented  fine-tuning of the pre-trained BERT model using the Hugging Fa
 
 [View the fine-tuning BERT code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/bert_wnli_finetune.py)
 
-<small>The link to the local files, in case one does not have access to the repository:
+<small>The link to the local files, in case one does not have access to the repository:</small>
 ---
 
 ## 2. Fine-tuning DistilBERT on WNLI
