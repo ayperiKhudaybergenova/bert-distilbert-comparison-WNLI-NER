@@ -36,6 +36,7 @@ Fine-tuned  DistilBERT model on the Winograd Natural Language Inference (WNLI) t
 
 [View the fine-tuning DistilBERT code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/distilBERT_wnli_finetuned.py)
 
+### The link to the local files, in case one does not have access to the repository:
 ---
 
 ## 3. Named Entity Recognition (NER) with BERT and DistilBERT
@@ -56,6 +57,7 @@ Results show BERT achieving higher F1 and accuracy scores, while DistilBERT offe
 
 [View the NER comparison code here](NER_finetuned_RealTestSet.py)
 
+### The link to the local files, in case one does not have access to the repository:
 
 2. Quantitative analysis: comparing named entities detected on **CoNLL-2003 test set**
    
@@ -81,6 +83,7 @@ This project evaluates zero-shot performance of pre-trained language models on t
 
 [View the zero-shot evaluation code here](https://github.com/ayperiKhudaybergenova/bert-distilbert-comparison-WNLI-NER/blob/main/bert%2CdistilBERT_wnli_zeroshot.py)
 
+### The link to the local files, in case one does not have access to the repository:
 
 In Conclusion,even though DistilBERT performs slightly lower than BERT in some tasks ( NER and WNLI), it still retains around 97% of BERT’s performance while being significantly smaller and faster. It is already a win. Depending on your task requirements — whether accuracy or efficiency is the priority — **either model can be the better choice**.
 
